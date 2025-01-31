@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { getHistory } from '../../services/cardsService';
+import { Component,Input,OnChanges  } from '@angular/core';
 
 @Component({
   selector: 'app-old-notes',
@@ -8,6 +7,8 @@ import { getHistory } from '../../services/cardsService';
   templateUrl: './old-notes.component.html',
   styleUrl: './old-notes.component.scss'
 })
-export class OldNotesComponent {
-  public history = getHistory();
+export class OldNotesComponent implements OnChanges {
+  @Input() history:any = [];
+  ngOnChanges() {
+  }
 }

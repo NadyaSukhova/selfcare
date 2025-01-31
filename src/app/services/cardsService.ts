@@ -1,6 +1,5 @@
-import { readFileSync } from 'fs';
+import {default as history} from "../mocks/oldnotes.json";
 
 export function getHistory() {
-    var history = readFileSync(`./src/app/mocks/oldnotes.json`, 'utf8');
-    return (JSON.parse(history));
+    return (history);
 }
