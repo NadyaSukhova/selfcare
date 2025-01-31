@@ -1,2 +1,9 @@
-<p>old-notes works!</p>
-<app-note/>
+<div>
+    @for (singleNote of history; track singleNote) {
+        {{singleNote.id}}<br>
+        {{singleNote.thoughtText}}<br>
+        {{singleNote.mistake}}<br>
+        {{singleNote.disproof}}<br>
+        {{singleNote.date}}<br>
+    }
+</div>
