@@ -1,14 +1,12 @@
-import { Component,Input,OnChanges  } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
+import { note } from '../../models/note/note.model';
 
 @Component({
   selector: 'app-old-notes',
   standalone: true,
-  imports: [],
   templateUrl: './old-notes.component.html',
-  styleUrl: './old-notes.component.scss'
+  styleUrl: './old-notes.component.scss',
 })
-export class OldNotesComponent implements OnChanges {
-  @Input() history:any;
-  ngOnChanges() {
-  }
+export class OldNotesComponent {
+  @Input() history: note[] = [];
 }

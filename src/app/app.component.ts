@@ -1,8 +1,7 @@
-import { Component,OnInit, OnChanges } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { OldNotesComponent } from './components/old-notes/old-notes.component';
 import { ThoughtComponent } from './components/thought/thought.component';
 import { NotesService } from './services/notes.service';
-
 
 @Component({
   selector: 'app-root',
@@ -10,15 +9,13 @@ import { NotesService } from './services/notes.service';
   imports: [ThoughtComponent, OldNotesComponent],
   template: `
     <div class="header">Когнитивные искажения</div>
-    <app-thought [addNote] = "this.notes.addNote"/>
-    <app-old-notes [history]="this.history"/>
+    <app-thought />
+    <app-old-notes [history]="this.history" />
   `,
   styleUrl: './app.component.scss',
-  providers: [NotesService]
+  providers: [NotesService],
 })
-export class AppComponent{
-  title = 'selcare-app';
-  public notes: any = new NotesService;
-  public history:any = this.notes.getHistory();
-
+export class AppComponent {
+  private notesService = inject(NotesService);
+  public history = this.notesService.getHistory();
 }

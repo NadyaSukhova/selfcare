@@ -1,9 +1,13 @@
 <div>
-    @for (singleNote of history; track singleNote) {
-        {{singleNote.id}}<br>
-        {{singleNote.thoughtText}}<br>
-        {{singleNote.mistake}}<br>
-        {{singleNote.disproof}}<br>
-        {{singleNote.date.getDate() < 10 ? '0': ''}}{{singleNote.date.getDate()}}.{{singleNote.date.getMonth() < 9 ? '0': ''}}{{singleNote.date.getMonth() + 1}}.{{singleNote.date.getFullYear()}}<br>
-    }
+  @for (singleNote of history; track singleNote) {
+  {{ singleNote.id }}<br />
+  {{ singleNote.thoughtText }}<br />
+  {{ singleNote.mistake }}<br />
+  {{ singleNote.disproof }}<br />
+  {{ singleNote.date.getDate() < 10 ? "0" : ""
+  }}{{ singleNote.date.getDate() }}.{{
+    singleNote.date.getMonth() < 9 ? "0" : ""
+  }}{{ singleNote.date.getMonth() + 1 }}.{{ singleNote.date.getFullYear()
+  }}<br />
+  }
 </div>
