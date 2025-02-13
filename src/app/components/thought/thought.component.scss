@@ -1,0 +1,34 @@
+h3{
+    text-align: center;
+}
+
+.addThought{
+    background-color: #fff;
+    border-radius: 30px;
+    width: 50vw;
+}
+
+.addButton{
+    font-size: 24px;
+    background-color: #297d77;
+    color: #fff;
+    border-radius: 20px;
+    width: fit-content;
+    border: 0;
+}
+
+.rightButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+#question{
+    background-image: url("../../../assets/question.png");
+    background-size: contain;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: 0;
+    height: 7vh;
+    width: 7vh;
+}

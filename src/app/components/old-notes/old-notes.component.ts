@@ -8,7 +8,7 @@ import { Component,Input,OnChanges  } from '@angular/core';
   styleUrl: './old-notes.component.scss'
 })
 export class OldNotesComponent implements OnChanges {
-  @Input() history:any = [];
+  @Input() history:any;
   ngOnChanges() {
   }
 }

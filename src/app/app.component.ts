@@ -1,7 +1,7 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,OnInit, OnChanges } from '@angular/core';
 import { OldNotesComponent } from './components/old-notes/old-notes.component';
 import { ThoughtComponent } from './components/thought/thought.component';
-import { getHistory } from './services/cardsService';
+import { Notes } from './services/Notes';
 import { note } from './models/note/note.model';
 
 
@@ -9,18 +9,16 @@ import { note } from './models/note/note.model';
   selector: 'app-root',
   standalone: true,
   imports: [ThoughtComponent, OldNotesComponent],
-  templateUrl: './app.component.html',
+  template: `
+    <div class="header">Когнитивные искажения</div>
+    <app-thought [addNote] = "this.notes.addNote"/>
+    <app-old-notes [history]="this.history"/>
+  `,
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit{
+export class AppComponent{
   title = 'selcare-app';
-  public history:any = [...getHistory()];
-  ngOnInit() {
-  };
+  public notes: any = new Notes;
+  public history:any = this.notes.getHistory();
 
-  public addNote(thoughtText:string, mistake:any, disproof:string, date:Date) {
-    var newNote:note = {id: 6, thoughtText: thoughtText, mistake: mistake, disproof: disproof, date: date};
-    console.log(newNote);
-    this.history.push(newNote);
-  }
 }

@@ -1,15 +1,21 @@
-<div>
+
+
+<form class="addThought">
+  <h3>Добавить запись</h3>
+  <div>
     <p>
       <label> Мысль </label>
       <input name="thoughtText" [(ngModel)]="thoughtText" />
     </p>
     <p>
-      <label> Ошибка мышления </label><br>
+      <label> Когнитивное искажение: </label>
         @for (singleMistake of mistakeList; track singleMistake) {
-          <input class="mistakeList" type="checkbox" [value]="singleMistake">{{singleMistake}}<br>
+          <br><input class="mistakeList" type="checkbox" [value]="singleMistake">{{singleMistake}}
         }
     </p>
-    <button id="question" (click)="showHint = !showHint" type="button"></button>
+    <div class="rightButton">
+      <button id="question" (click)="showHint = !showHint" type="button"></button>
+    </div>
     @if (showHint) {
     <div class="hint">
       <strong>«Всё или ничего».</strong> Этот вид когнитивных искажений
@@ -58,4 +64,5 @@
       <input type="date" [(ngModel)]="date">
     </p>
   </div>
-  <button (click)="addNote(thoughtText, mistake, disproof, date)">Записать</button>
+  <button class="addButton" (click)="addNote(thoughtText, mistake, disproof, date)">Записать</button>
+</form>
