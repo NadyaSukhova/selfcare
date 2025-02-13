@@ -1,8 +1,7 @@
 import { Component,OnInit, OnChanges } from '@angular/core';
 import { OldNotesComponent } from './components/old-notes/old-notes.component';
 import { ThoughtComponent } from './components/thought/thought.component';
-import { Notes } from './services/Notes';
-import { note } from './models/note/note.model';
+import { NotesService } from './services/notes.service';
 
 
 @Component({
@@ -14,11 +13,12 @@ import { note } from './models/note/note.model';
     <app-thought [addNote] = "this.notes.addNote"/>
     <app-old-notes [history]="this.history"/>
   `,
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  providers: [NotesService]
 })
 export class AppComponent{
   title = 'selcare-app';
-  public notes: any = new Notes;
+  public notes: any = new NotesService;
   public history:any = this.notes.getHistory();
 
 }

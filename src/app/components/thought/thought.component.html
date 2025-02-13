@@ -1,18 +1,16 @@
 
 
-<form class="addThought">
+<form class="addThought" [formGroup]="formInput">
   <h3>Добавить запись</h3>
   <div>
     <p>
       <label> Мысль </label>
-      <input name="thoughtText" [(ngModel)]="thoughtText" />
+      <input name="thoughtText" formControlName="thoughtText" />
     </p>
-    <p>
       <label> Когнитивное искажение: </label>
-        @for (singleMistake of mistakeList; track singleMistake) {
-          <br><input class="mistakeList" type="checkbox" [value]="singleMistake">{{singleMistake}}
-        }
-    </p>
+        <div *ngFor="let singleMistake of mistakeList; let i = index">
+          <input class="mistakeList" type="checkbox" [value]="singleMistake" formControlName="mistake_{{i+1}}" >{{singleMistake}}
+        </div>
     <div class="rightButton">
       <button id="question" (click)="showHint = !showHint" type="button"></button>
     </div>
@@ -57,12 +55,12 @@
     }
     <p>
       <label> Опровержение </label>
-      <input name="disproof" [(ngModel)]="disproof" />
+      <input name="disproof" formControlName="disproof" />
     </p>
     <p>
       <label> Дата </label>
-      <input type="date" [(ngModel)]="date">
+      <input type="date" formControlName="date">
     </p>
   </div>
-  <button class="addButton" (click)="addNote(thoughtText, mistake, disproof, date)">Записать</button>
+  <button class="addButton" (click)="saveThought()">Записать</button>
 </form>
