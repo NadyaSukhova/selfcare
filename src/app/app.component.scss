@@ -1,4 +1,4 @@
-.header{
+.appHeader{
     background-color: #fff;
     border-radius: 30px;
     font-size: 36px;
@@ -6,4 +6,14 @@
     text-transform: uppercase;
     text-align: center;
     margin: 0 auto;
+}
+
+.appBody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.appBody > *{
+    margin-top: 3vw;
 }

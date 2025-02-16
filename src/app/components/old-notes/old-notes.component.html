@@ -1,13 +1,16 @@
-<div>
+<div class="oldNotes">
   @for (singleNote of history; track singleNote) {
-  {{ singleNote.id }}<br />
-  {{ singleNote.thoughtText }}<br />
-  {{ singleNote.mistake }}<br />
-  {{ singleNote.disproof }}<br />
+  ID: {{ singleNote.id }} (потом уберу)<br />
   {{ singleNote.date.getDate() < 10 ? "0" : ""
   }}{{ singleNote.date.getDate() }}.{{
     singleNote.date.getMonth() < 9 ? "0" : ""
   }}{{ singleNote.date.getMonth() + 1 }}.{{ singleNote.date.getFullYear()
   }}<br />
+  <label>Мысль:</label> {{ singleNote.thoughtText }}<br />
+  <label>Ошибка мышления:</label> @for (singleMistake of singleNote.mistake; track singleMistake; let idx = $index) {
+    {{singleMistake}}{{idx == singleNote.mistake.length - 1 ? '' : ", "}}
+  }<br />
+  <label>Опровержение:</label> {{ singleNote.disproof }}<br />
+  <hr style="margin-left: -12px; border-top: dashed 2px; color: #a1d9b7"/>
   }
 </div>

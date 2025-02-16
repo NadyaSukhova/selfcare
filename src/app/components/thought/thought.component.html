@@ -4,11 +4,11 @@
   <h3>Добавить запись</h3>
   <div>
     <p>
-      <label> Мысль </label>
-      <input name="thoughtText" formControlName="thoughtText" />
+      <label for="thoughtText">Мысль: </label>
+      <textarea id="thoughtText" name="thoughtText" formControlName="thoughtText"></textarea>
     </p>
       <label> Когнитивное искажение: </label>
-        <div *ngFor="let singleMistake of mistakeList; let i = index">
+        <div *ngFor="let singleMistake of mistakeList; let i = index" class="thoughtMistakes">
           <input class="mistakeList" type="checkbox" [value]="singleMistake" formControlName="mistake_{{i+1}}" >{{singleMistake}}
         </div>
     <div class="rightButton">
@@ -16,6 +16,7 @@
     </div>
     @if (showHint) {
     <div class="hint">
+      <br />
       <strong>«Всё или ничего».</strong> Этот вид когнитивных искажений
       описывает склонность к оценке своих личных качеств исключительно в
       черно-белых тонах.<br /><strong> Сверхобобщение.</strong> Вы делаете
@@ -54,12 +55,12 @@
     </div>
     }
     <p>
-      <label> Опровержение </label>
-      <input name="disproof" formControlName="disproof" />
+      <label for="disproof"> Опровержение: </label>
+      <textarea name="disproof" id="disproof" formControlName="disproof"></textarea>
     </p>
     <p>
-      <label> Дата </label>
-      <input type="date" formControlName="date">
+      <label for="thoughtDate"> Дата: </label>
+      <input id="thoughtDate" name="thoughtDate" type="date" formControlName="date" max="{{nowDate}}"/>
     </p>
   </div>
   <button class="addButton" (click)="saveThought()">Записать</button>

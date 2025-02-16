@@ -13,7 +13,7 @@ import { NotesService } from '../../services/notes.service';
 })
 export class ThoughtComponent {
   private notesService = inject(NotesService);
-
+  nowDate = new Date().getFullYear() + '-' + (new Date().getMonth() < 9 ? '0' : '') + (new Date().getMonth() + 1) + '-'+ (new Date().getDate() < 9 ? '0' : '') + new Date().getDate();
   formInput = new FormGroup({
     thoughtText: new FormControl(''),
     mistake_1: new FormControl(''),
@@ -28,7 +28,7 @@ export class ThoughtComponent {
     mistake_10: new FormControl(''),
     mistake_11: new FormControl(''),
     disproof: new FormControl(''),
-    date: new FormControl(new Date()),
+    date: new FormControl(this.nowDate),
   });
 
   showHint: boolean = false;
@@ -69,7 +69,7 @@ export class ThoughtComponent {
       this.formInput.controls.thoughtText.value || '',
       mistakes,
       this.formInput.controls.disproof.value || '',
-      this.formInput.controls.date.value || new Date()
+      this.formInput.controls.date.value ? new Date(this.formInput.controls.date.value) : new Date()
     );
   }
 }

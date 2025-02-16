@@ -29,14 +29,14 @@ export class NotesService {
     date: Date
   ) {
     console.log({
-      id: 6,
+      id: Date.now(),
       thoughtText: thoughtText,
       mistake: mistake,
       disproof: disproof,
       date: date,
     });
     this.history.push({
-      id: 6,
+      id: Date.now(),
       thoughtText: thoughtText,
       mistake: mistake,
       disproof: disproof,

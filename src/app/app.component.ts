@@ -8,9 +8,11 @@ import { NotesService } from './services/notes.service';
   standalone: true,
   imports: [ThoughtComponent, OldNotesComponent],
   template: `
-    <div class="header">Когнитивные искажения</div>
-    <app-thought />
-    <app-old-notes [history]="this.history" />
+    <div class="appHeader">Когнитивные искажения</div>
+    <div class="appBody">
+      <app-thought />
+      <app-old-notes [history]="this.history" />
+    </div>
   `,
   styleUrl: './app.component.scss',
   providers: [NotesService],
