@@ -1,0 +1,11 @@
+@font-face {
+    font-family: myFont;
+    src: url("./app/styles/AlumniSans-Regular.ttf");
+  }
+body{
+    background-color: #a1d9b7;
+    font-family: myFont;
+}
+.appBody > div {
+    margin: 2vh auto;
+  }
