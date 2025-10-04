@@ -34,6 +34,7 @@ const formRef = useRef();
     data.mistakes = mistakes;
     console.log(data); // Данные формы
     props.addNote(data.thoughtText, data.mistakes, data.disproof, new Date(data.thoughtDate));
+    formRef.current.reset();
   };
 
   function thoughtMistakes() {
