@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
+import { getFirestore, collection, addDoc, getDocs, query } from "firebase/firestore";
 import { note } from '../models/note/note.model';
-import { doc, getDoc } from "firebase/firestore";
 
 export class NotesService {
   static apiKey = process.env.REACT_APP_API_KEY;
@@ -28,33 +27,44 @@ export class NotesService {
 
   static async initialize() {
     if (!NotesService.userId) {
-      throw new Error("Документ не найден!");
-    }
-    const docRef = doc(NotesService.db, "users", NotesService.userId, "notes");
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      console.log("Данные документа:", docSnap.data());
-    } else {
-      console.log("Документ не найден!");
+      throw new Error("Пользователь не найден!");
     }
 
     try {
-      const data = docSnap.data();
-      if (data) {
-        NotesService.history = Object.entries(data).map(doc => {
-          return {
-            id: data.id, // Используем ID документа из Firestore
-            thoughtText: data.thoughtText,
-            mistakes: data.mistakes,
-            disproof: data.disproof,
-            date: data.date.toDate() // Конвертируем Timestamp в Date
-          };
-        });
-        console.log(NotesService.history)
+      const notesQuery = query(
+        collection(this.db, "users", NotesService.userId, "notes")
+      );
+      var foundEnd, notesEnd;
+      const docSnap = await getDocs(notesQuery);
+      if (docSnap.docs.length == 1) {
+        foundEnd = 'a';
+        notesEnd = 'ь';
       }
-    } catch (e) {
-      console.error("Error loading history: ", e);
+      else if (docSnap.docs.length > 1 && docSnap.docs.length < 5) {
+        foundEnd = 'о';
+        notesEnd = 'и';
+      }
+      else {
+        foundEnd = 'о';
+        notesEnd = 'ей';
+      }
+      console.log(`Найден${foundEnd} ${docSnap.docs.length} запис${notesEnd}`);
+      NotesService.history = docSnap.docs.map((doc) => {
+        const data = doc.data(); // Retrieve the document data
+        return {
+          thoughtText: data.thoughtText,
+          mistakes: data.mistakes,
+          disproof: data.disproof,
+          date: data.date
+          // ... include all other properties required by your 'note' interface
+        } as note; // Explicit type assertion
+      });
+      if (docSnap.empty) {
+        console.log("Записей нет");
+      }
+
+    } catch (error) {
+      console.error("Ошибка при получении записей:", error);
     }
   }
 
@@ -62,32 +72,9 @@ export class NotesService {
     mistakes: string[],
     disproof: string,
     date: Date) => {
-    try {
-      let docRef = await addDoc(collection(NotesService.db, `users/${NotesService.userId}/notes`), {
-        id: Date.now(),
-        thoughtText: thoughtText,
-        mistakes: mistakes,
-        disproof: disproof,
-        date: new Date(date)
-      });
-      console.log("Document written with ID: ", docRef.id);
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    };
-    this.history.push({
-      id: Date.now(),
-      thoughtText: thoughtText,
-      mistakes: mistakes,
-      disproof: disproof,
-      date: new Date(date),
-    });
-    this.history.sort((a, b) => (b.date as Date).getTime() - (a.date as Date).getTime());
   }
 
   static getHistory() {
-    NotesService.history.forEach((doc) => {
-      console.log(doc.id, " => ", doc);
-    });
     return [...NotesService.history];
   }
 

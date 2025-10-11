@@ -1,3 +1,37 @@
+.oldNotes .note-field {
+    color: #297d77;
+    font-weight: bold;
+    font-size: 28px;
+    margin: 2vh 1vw 0;
+}
+
+.field-row {
+    display: flex;
+    align-items: flex-end;
+}
+
+.mistakes-list {
+    display: block;
+    margin: 0;
+}
+
+.field-row .field-content,
+.field-row .note-field {
+    white-space: nowrap;
+}
+
+.mistakes-list li::marker {
+    color: #297d77;
+    font-weight: bold;
+    font-size: 28px;
+}
+
+.oldNotes hr {
+    margin-left: -12px;
+    border-top: dashed 2px;
+    color: #a1d9b7,
+}
+
 .oldNotes {
     background-color: #fff;
     border-radius: 30px;
@@ -5,15 +39,4 @@
     font-size: 28px;
     padding: 3vw;
     height: fit-content;
-    font-size: 24px;
-    hyphens: auto;
-    -moz-hyphens: auto;
-    -webkit-hyphens: auto;
-    -ms-hyphens: auto;
-}
-
-.oldNotes > label {
-    color: #297d77;
-    font-weight: bold;
-    font-size: 28px;
 }

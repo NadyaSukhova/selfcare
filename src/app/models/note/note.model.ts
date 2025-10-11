@@ -1,5 +1,5 @@
 export interface note {
-    id: number,
+    id: string,
     thoughtText: string,
     mistakes: string[],
     disproof: string,
