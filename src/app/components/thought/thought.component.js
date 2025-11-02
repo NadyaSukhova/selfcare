@@ -1,24 +1,16 @@
 import { useState, useRef } from "react";
-import "./thought.component.scss";
+import {
+  mistakeDescription,
+  mistakeList,
+} from "../../../constants/mistakes-description.constants";
+import * as style from "./thought.styles";
 
 function Thought(props) {
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
   };
-  const mistakeList = [
-    "Мышление «Всё или ничего»",
-    "Сверхобобщение",
-    "Пессимизм",
-    "Обесценивание положительного",
-    "Чтение мыслей",
-    "Ошибка предсказания",
-    "Преувеличение/преуменьшение",
-    "Эмоциональное обоснование",
-    "Императивы",
-    "Ярлыки",
-    "Вина",
-  ];
+
   var nowDate =
     new Date().getFullYear() +
     "-" +
@@ -51,11 +43,10 @@ function Thought(props) {
 
   function thoughtMistakes() {
     return (
-      <ul className="thoughtMistakes" id="thought-mistakes">
+      <style.thoughtMistakes id="thought-mistakes">
         {mistakeList.map((singleMistake, index) => (
           <li>
-            <input
-              className="mistakeList"
+            <style.mistakeList
               type="checkbox"
               value={singleMistake}
               id={`mistake-${index}`}
@@ -65,7 +56,7 @@ function Thought(props) {
             <label htmlFor={`mistake-${index}`}>{singleMistake}</label>
           </li>
         ))}
-      </ul>
+      </style.thoughtMistakes>
     );
   }
   var mistakesAnswers = mistakeList.map(() => false);
@@ -74,87 +65,29 @@ function Thought(props) {
   }
 
   return (
-    <div className="addThoughtDiv">
-      <form ref={formRef} className="addThought" onSubmit={handleSubmit}>
-        <h3>Добавить запись</h3>
+    <style.addThoughtDiv>
+      <style.addThought ref={formRef} onSubmit={handleSubmit}>
+        <style.h1>Добавить запись</style.h1>
         <div>
           <p>
             <label htmlFor="thoughtText">Мысль: </label>
-            <textarea
-              id="thoughtText"
-              name="thoughtText"
-            ></textarea>
+            <style.textarea name="thoughtText"></style.textarea>
           </p>
           <label htmlFor="thought-mistakes"> Когнитивное искажение: </label>
           {thoughtMistakes()}
-          <div className="rightButton">
-            <button
-              id="question"
-              onClick={toggleVisibility}
-              type="button"
-            ></button>
-          </div>
-          {isVisible && (
-            <>
-              <br />
-              <strong>«Всё или ничего».</strong> Этот вид когнитивных искажений
-              описывает склонность к оценке своих личных качеств исключительно в
-              черно-белых тонах.
-              <br />
-              <br />
-              <strong> Сверхобобщение.</strong> Вы делаете ошибочный вывод, что
-              событие, которое произошло с вами один раз, будет повторяться
-              снова и снова. <br />
-              <br />
-              <strong> Пессимизм.</strong> Находясь в определенной ситуации, вы
-              выбираете негативную деталь и фиксируетесь исключительно на ней,
-              таким образом негативно воспринимая всю ситуацию в целом.
-              <br />
-              <br />
-              <strong> Обесценивание положительного. </strong>Настойчивая
-              привычка некоторых людей в депрессии превращать нейтральный или
-              даже позитивный опыт в негативный. Вы не просто игнорируете
-              положительный опыт — вы быстро и умело превращаете его в кошмар.
-              <br />
-              <br />
-              <strong> Чтение мыслей.</strong> Вы делаете предположение, что
-              другие люди смотрят на вас свысока, и настолько убеждены в этом,
-              что даже не пытаетесь проверить это предположение. <br />
-              <br />
-              <strong> Ошибка предсказания.</strong> Вы предполагаете, что
-              произойдет что-то плохое, и принимаете это предсказание как факт,
-              хотя оно не соответствует реальности. <br />
-              <br />
-              <strong> Преувеличение/преуменьшение.</strong> Вы либо раздуваете
-              вещи до гигантских масштабов, либо делаете их микроскопически
-              маленькими. Обычно эффект увеличения работает, когда вы смотрите
-              на свои собственные ошибки, страхи или недостатки, преувеличивая
-              их важность, а когда вы думаете о своих сильных сторонах, то
-              можете делать противоположное — преуменьшать их значимость .{" "}
-              <br />
-              <br />
-              <strong> Эмоциональное обоснование. </strong>Вы принимаете свои
-              эмоции как доводы в пользу некой истины. Такая логика гласит: «Я
-              чувствую себя дураком — следовательно, я дурак». <br />
-              <br />
-              <strong> Императивы.</strong> Вы пытаетесь замотивировать себя,
-              говоря: «Я должен это сделать» или «Я обязан это сделать». Эти
-              заявления вызывают ощущение принуждения и обиды. Как ни
-              парадоксально, в итоге вы чувствуете апатию и отсутствие
-              мотивации.
-              <br />
-              <br />
-              <strong> Ярлыки.</strong> Навешивание на себя ярлыков, крайняя
-              форма сверхобобщения. Вы можете подумать «Я неудачник», хотя это
-              можно заменить на «Я допустил ошибку». <br />
-              <br />
-              <strong> Вина. </strong>Вместо решения проблемы, вы ищите
-              виноватых. В данном случае возможно обвинение других или
-              самообвинение.
-            </>
-          )}
+          <style.rightButton>
+            <style.question onClick={toggleVisibility} type="button"></style.question>
+          </style.rightButton>
+          {isVisible ? (
+            <style.thoughtMistakesDescription>
+              {mistakeDescription.map((el) => (
+                <style.oneMistakeDescription>
+                  <strong>{el.name}:</strong> {el.description}
+                </style.oneMistakeDescription>
+              ))}
+            </style.thoughtMistakesDescription>
+          ) : null}
           <p>
-            {" "}
             <label htmlFor="disproof"> Опровержение: </label>
             <textarea
               name="disproof"
@@ -173,11 +106,9 @@ function Thought(props) {
             />
           </p>
         </div>
-        <button className="addButton" type="submit">
-          Записать
-        </button>
-      </form>
-    </div>
+        <style.addButton type="submit">Записать</style.addButton>
+      </style.addThought>
+    </style.addThoughtDiv>
   );
 }
 

@@ -22,13 +22,12 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <div class="appHeader">Когнитивные искажения</div>
-        <div class="appBody">
-          <app-thought />
-          <Thought addNote={addNewNote} />
-          <OldNotes history={history} />
-        </div>
+        <h3 class="appHeader">Когнитивные искажения</h3>
       </header>
+      <main className="appBody">
+        <Thought addNote={addNewNote} />
+        <OldNotes history={history} />
+      </main>
     </div>
   );
 }

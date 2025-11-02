@@ -15,10 +15,7 @@ function OldNotes(props) {
 
   function formatDate(timestamp) {
     try {
-      // Конвертируем секунды в миллисекунды
       const date = timestamp.toDate();
-
-      // Проверяем валидность даты
       if (isNaN(date.getTime())) {
         return "Неверная дата";
       }
