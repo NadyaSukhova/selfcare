@@ -20,7 +20,8 @@ function Autorization({ DB, setIsAuthenticated, saveUser }) {
       const userDocSnap = await getDoc(userDocRef);
       if (userDocSnap.exists()) {
         setIsAuthenticated(true);
-        console.log(userDocSnap);
+        const userData = userDocSnap.data();
+        saveUser(userId, userData.nickName);
       } else {
         setIsAuthenticated(false);
       }

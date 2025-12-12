@@ -1,27 +1,22 @@
 import "./style.scss";
 import "./app/app.component.scss";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { NotesService } from "./app/services/db.service.ts";
+import { useState, useCallback } from "react";
 import { DB } from "./app/services/connection.dervice.ts";
 import { StorageService } from "./app/services/localStorage.service.ts";
 import Autorization from "./app/components/autorization/autorization.component.js";
 import OldNotes from "./app/components/old-notes/old-notes.component.js";
 import Thought from "./app/components/thought/thought.component.js";
 
-function App() {
-  const notes = new NotesService();
-  const userId=StorageService.getUserId();
-  const [isAuthenticated, setIsAuthenticated] = useState(userId != null);
-  const [history, setHistory] = useState(NotesService.getHistory());
+export function App() {
+  const userId = StorageService.getUserId();
+  const nickName= StorageService.getUserName();
+  const [isAuthenticated, setIsAuthenticated] = useState(userId != null && userId != undefined);
+  const [history, setHistory] = useState([]);
 
-  useEffect(() => {
-    const loadData = async () => {
-      await NotesService.initialize();
-      setHistory(NotesService.getHistory());
-    };
-    loadData();
-  }, [userId]);
+  const saveUser = useCallback((userId, name) => {
+    StorageService.saveUser(userId, name);
+  }, []);
 
   function addNewNote(thoughtText, mistakes, disproof, date) {}
 
@@ -37,17 +32,22 @@ function App() {
             path="/"
             element={
               isAuthenticated ? (
-                <Navigate to="/dairy" replace />
+                <Navigate to="/dairy" replace/>
               ) : (
-                <Autorization DB={DB} setIsAuthenticated={setIsAuthenticated} saveUser={StorageService.saveUser}/>
+                <Autorization
+                  DB={DB}
+                  setIsAuthenticated={setIsAuthenticated}
+                  saveUser={saveUser}
+                />
               )
             }
           />
-         <Route
+          <Route
             path="/dairy"
             element={
               isAuthenticated ? (
                 <>
+                Hello, {nickName}!
                   <Thought addNote={addNewNote} />
                   <OldNotes history={history} />
                 </>
@@ -61,5 +61,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
