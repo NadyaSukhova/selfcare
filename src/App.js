@@ -18,7 +18,7 @@ function App() {
   useEffect(() => {
     const loadData = async () => {
       await NotesService.initialize();
-      setHistory(NotesService.getHistory()); // Теперь это статический метод
+      setHistory(NotesService.getHistory());
     };
     loadData();
   }, [userId]);
@@ -39,7 +39,7 @@ function App() {
               isAuthenticated ? (
                 <Navigate to="/dairy" replace />
               ) : (
-                <Autorization DB={DB} setIsAuthenticated={setIsAuthenticated} saveUser={StorageService.saveUserId}/>
+                <Autorization DB={DB} setIsAuthenticated={setIsAuthenticated} saveUser={StorageService.saveUser}/>
               )
             }
           />
