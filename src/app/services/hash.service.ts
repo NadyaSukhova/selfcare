@@ -1,0 +1,15 @@
+async function hashData(data:string):Promise<String> {
+  const encoder = new TextEncoder();
+  const dataBuffer = encoder.encode(data);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', dataBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  
+  return hashHex;
+}
+
+
+export async function hashTwoValues(value1:string, value2:string):Promise<String> {
+    const withSeparator = `${value1}:${value2}`;
+    return await hashData(withSeparator);
+  }
